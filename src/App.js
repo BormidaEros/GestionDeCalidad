@@ -7,41 +7,55 @@ function App() {
   function encriptarTelefono(event) {
     event.preventDefault();
 
-    var telefonoInput = document.getElementById("telefono");
-    var telefono = telefonoInput.value;
+    const telefonoInput = document.getElementById("telefono");
+    const telefono = telefonoInput.value;
 
     if (telefono.length !== 4 || isNaN(telefono)) {
       alert("El número no cumple con las condiciones.");
       return;
     }
 
-    var digitos = telefono.split("");
-    var encriptado = "";
+    const digitos = telefono.split("");
+    let encriptado = "";
 
-    for (var i = 0; i < digitos.length; i++) {
-      var digito = parseInt(digitos[i]);
-      var encriptadoDigito = (digito + 7) % 10;
+    for (let i = 0; i < digitos.length; i++) {
+      const digito = parseInt(digitos[i]);
+      const encriptadoDigito = (digito + 7) % 10;
       encriptado += encriptadoDigito;
     }
 
-    var primerDigito = encriptado[0];
-    var tercerDigito = encriptado[2];
-    encriptado = encriptado.substr(0, 1) + tercerDigito + encriptado.substr(2, 1) + primerDigito;
+    const primerDigito = encriptado[0];
+    const tercerDigito = encriptado[2];
+    encriptado = tercerDigito + encriptado[1] + primerDigito + encriptado[3];
 
     setNumeroCifrado(encriptado);
     setNumeroDesencriptado("");
   }
 
+ 
   function desencriptarTelefono() {
-    var numeroCifradoInput = document.getElementById("numeroCifrado");
-    var numeroCifrado = numeroCifradoInput.value;
-
-    var primerDigito = numeroCifrado[0];
-    var tercerDigito = numeroCifrado[2];
-    var desencriptado = tercerDigito + numeroCifrado.substr(1, 1) + primerDigito + numeroCifrado.substr(3, 1);
-
+    const numeroCifradoInput = document.getElementById("numeroCifrado");
+    const numeroCifrado = numeroCifradoInput.value;
+  
+    const primerDigito = numeroCifrado[2];
+    const segundoDigito = numeroCifrado[1];
+    const tercerDigito = numeroCifrado[0];
+    const cuartoDigito = numeroCifrado[3];
+  
+    const desencriptadoDigito1 = (parseInt(tercerDigito) + 3) % 10;
+    const desencriptadoDigito2 = (parseInt(cuartoDigito) + 3) % 10;
+    const desencriptadoDigito3 = (parseInt(primerDigito) + 3) % 10;
+    const desencriptadoDigito4 = (parseInt(segundoDigito) + 3) % 10;
+  
+    const desencriptado = desencriptadoDigito3.toString() + desencriptadoDigito4.toString() + desencriptadoDigito1.toString() + desencriptadoDigito2.toString();
+  
     setNumeroDesencriptado("Teléfono desencriptado: " + desencriptado);
   }
+  
+  
+  
+  
+  
 
   return (
     <div className="w-full max-w-xs">
