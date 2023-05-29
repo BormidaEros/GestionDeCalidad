@@ -21,7 +21,7 @@ function App() {
     for (let i = 0; i < digitos.length; i++) {
       const digito = parseInt(digitos[i]);
       const encriptadoDigito = (digito + 7) % 10;
-      encriptado += encriptadoDigito;
+      encriptado += encriptadoDigito.toString();
     }
 
     const primerDigito = encriptado[0];
@@ -32,31 +32,28 @@ function App() {
     setNumeroDesencriptado("");
   }
 
- 
   function desencriptarTelefono() {
     const numeroCifradoInput = document.getElementById("numeroCifrado");
     const numeroCifrado = numeroCifradoInput.value;
-  
+
     const primerDigito = numeroCifrado[2];
     const segundoDigito = numeroCifrado[1];
     const tercerDigito = numeroCifrado[0];
     const cuartoDigito = numeroCifrado[3];
-  
+
     const desencriptadoDigito1 = (parseInt(tercerDigito) + 3) % 10;
     const desencriptadoDigito2 = (parseInt(cuartoDigito) + 3) % 10;
     const desencriptadoDigito3 = (parseInt(primerDigito) + 3) % 10;
     const desencriptadoDigito4 = (parseInt(segundoDigito) + 3) % 10;
-  
-    const desencriptado = desencriptadoDigito3.toString() + desencriptadoDigito4.toString() + desencriptadoDigito1.toString() + desencriptadoDigito2.toString();
-  
+
+    const desencriptado =
+      desencriptadoDigito3.toString() +
+      desencriptadoDigito4.toString() +
+      desencriptadoDigito1.toString() +
+      desencriptadoDigito2.toString();
+
     setNumeroDesencriptado("Teléfono desencriptado: " + desencriptado);
   }
-  
-  
-  
-  
-  
-
   return (
     <div className="w-full max-w-xs">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -103,5 +100,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
